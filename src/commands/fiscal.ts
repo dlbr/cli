@@ -104,7 +104,7 @@ function renderHumanReadableStatus(id: string, data: POSStatusResponse['data']):
   console.log();
 }
 
-function renderHumanReadableList(receipts: FiscalReceipt[], offset: number): void {
+function renderHumanReadableList(receipts: readonly FiscalReceipt[], offset: number): void {
   console.log(`\n${green('=== Fiscal Receipts List ===')}`);
   if (receipts.length === 0) {
     console.log(dim('No fiscal receipts found.'));

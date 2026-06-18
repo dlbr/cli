@@ -13,7 +13,7 @@ const program = new Command();
 program
   .name('dlbr')
   .description('DLBR Command Line Interface')
-  .version('1.0.0')
+  .version('1.0.0', '-v, --version')
   .exitOverride((err) => {
     throw err;
   });
@@ -34,13 +34,16 @@ program.on('command:*', function (operands: string[]) {
   process.exit(1);
 });
 
-async function run() {
+(async () => {
   try {
+    if (process.argv.length === 2) {
+      program.help();
+    }
     await program.parseAsync(process.argv);
     const cmd = program.args[0] || 'help';
     if (cmd !== 'help') reportMetric(cmd, 'SUCCESS');
   } catch (error: any) {
-    if (error.code === 'commander.helpDisplayed' || error.code === 'commander.help') {
+    if (error.code === 'commander.helpDisplayed' || error.code === 'commander.version') {
       process.exit(0);
     }
     
@@ -51,6 +54,4 @@ async function run() {
     console.error(`\n${red(bold('Internal Error:'))} ${msg}`);
     process.exit(1);
   }
-}
-
-run();
+})();

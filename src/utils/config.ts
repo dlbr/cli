@@ -12,7 +12,7 @@ export async function getConfigDir(): Promise<string> {
   const xdgConfigHome = process.env.XDG_CONFIG_HOME || path.join(home, '.config');
   const configDir = path.join(xdgConfigHome, 'dlbr');
 
-  await fs.mkdir(configDir, { recursive: true });
+  await fs.mkdir(configDir, { recursive: true, mode: 0o700 });
   return configDir;
 }
 
@@ -38,5 +38,5 @@ export async function writeConfig(config: CLIConfig): Promise<void> {
   const file = await getConfigFile();
   const existingConfig = await readConfig();
   const newConfig = { ...existingConfig, ...config };
-  await fs.writeFile(file, JSON.stringify(newConfig, null, 2), 'utf-8');
+  await fs.writeFile(file, JSON.stringify(newConfig, null, 2), { encoding: 'utf-8', mode: 0o600 });
 }

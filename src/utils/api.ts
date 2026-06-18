@@ -1,6 +1,6 @@
 import { readConfig } from './config.js';
 
-export const API_BASE_URL = process.env.DLBR_API_URL;
+export const API_BASE_URL = process.env.DLBR_API_URL || 'https://api.dlbr.cloud';
 
 export interface APIError {
   success: false;

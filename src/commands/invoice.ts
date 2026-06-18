@@ -1,29 +1,8 @@
 import { Command } from 'commander';
 import { request } from '../utils/api.js';
 import { red, green, bold, dim, yellow, gray } from 'yoctocolors';
-
-export interface InvoiceRecord {
-  id: string;
-  broj: string;
-  iznos: number;
-  valuta: string;
-  partner_naziv: string;
-  status: string;
-  azurirano: string;
-}
-
-export interface InvoiceListResponse {
-  success: boolean;
-  data: InvoiceRecord[];
-}
-
-export interface InvoiceStatusResponse {
-  id: string;
-  status: string;
-  sefId?: string;
-  broj: string;
-  poruka?: string;
-}
+import ora from 'ora';
+import type { InvoiceListResponse, InvoiceStatusResponse } from '@dlbr/shared';
 
 export function registerInvoiceCommands(program: Command): void {
   const invoiceCmd = program
@@ -32,7 +11,7 @@ export function registerInvoiceCommands(program: Command): void {
 
   invoiceCmd
     .command('status <id>')
-    .description('Check the SEF status of an invoice by its ID')
+    .description(gray('Check the SEF status of an invoice by its ID'))
     .option('--json', 'Output results in JSON format')
     .action(async (id: string, options: { json?: boolean }): Promise<void> => {
       try {
@@ -67,7 +46,7 @@ export function registerInvoiceCommands(program: Command): void {
 
   invoiceCmd
     .command('list')
-    .description('List invoices from the internal registry')
+    .description(gray('List invoices from the internal registry'))
     .option('--direction <direction>', 'Direction of invoices (OUTBOUND or INBOUND)', 'OUTBOUND')
     .option('--page <page>', 'Page number', '1')
     .option('--limit <limit>', 'Number of items per page', '10')
