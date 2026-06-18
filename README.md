@@ -2,7 +2,7 @@
 
 The official Command Line Interface for the DLBR Fiscalization and e-Invoicing Edge Infrastructure.
 
-DLBR CLI is a Titanium-grade, edge-native terminal tool designed for zero-latency interaction with your workspaces. It provides deterministic, typed execution of fiscal receipts, invoice drafting, and tenant management natively from your terminal.
+The DLBR CLI provides deterministic, typed execution of fiscal receipts, invoice drafting, and tenant management natively from your terminal.
 
 ## Installation
 
