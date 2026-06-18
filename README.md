@@ -64,30 +64,31 @@ Once reloaded, typing `dlbr [Tab]` will instantly list available commands and th
 
 ## Commands
 
+### Authentication
+Authenticate and manage your identity.
+- `dlbr login` - Authenticate with the DLBR SEF API
+- `dlbr me` (or `dlbr whoami`) - Display information about the current authenticated session
+
 ### Fiscalization
-
-Manage high-throughput fiscal transactions directly from your terminal.
-
-- `dlbr fiscal receipt` - Issue a new fiscal receipt.
-- `dlbr fiscal z-report` - Issue a Z report.
-- `dlbr fiscal x-report` - Issue an X report.
+Manage Fiscalization transactions.
+- `dlbr fiscal status <transactionId>` - Check the status of a POS transaction
+- `dlbr fiscal list` - List fiscal receipts from the internal ledger
 
 ### Invoicing
-
-Manage electronic invoices (e-Fakture).
-
-- `dlbr invoice list` - List recent invoices.
-- `dlbr invoice send` - Send an invoice.
-- `dlbr invoice draft` - Create an invoice draft.
-- `dlbr invoice view` - View specific invoice details.
+Manage SEF invoices.
+- `dlbr invoice status <id>` - Check the SEF status of an invoice by its ID
+- `dlbr invoice list` - List invoices from the internal registry
 
 ### Workspaces
+Manage active workspace configuration.
+- `dlbr workspace set <id>` - Set the active workspace ID
+- `dlbr workspace get` - Get the currently configured active workspace ID
 
-Tenant and environment management.
-
-- `dlbr workspace list` - List available workspaces.
-- `dlbr workspace switch` - Switch your active workspace context.
-- `dlbr workspace info` - View configuration and active context data.
+### Archive
+Manage UBL/SEF document storage.
+- `dlbr archive list` - List archived documents
+- `dlbr archive put <filePath>` - Upload a document to the archive
+- `dlbr archive get <fileId>` - Download an archived document
 
 ## Configuration & Environments
 

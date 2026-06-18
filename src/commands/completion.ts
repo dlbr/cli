@@ -9,27 +9,27 @@ _dlbr_completions() {
 
   case "\${prev}" in
     dlbr)
-      opts="auth invoice fiscal workspace completion help"
+      opts="login me whoami invoice invoices fiscal workspace archive completion help"
       COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
       return 0
       ;;
-    auth)
-      opts="login logout status whoami session"
-      COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
-      return 0
-      ;;
-    invoice)
-      opts="list send view draft"
+    invoice|invoices)
+      opts="status list"
       COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
       return 0
       ;;
     fiscal)
-      opts="receipt z-report x-report"
+      opts="status list"
       COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
       return 0
       ;;
     workspace)
-      opts="list switch info"
+      opts="set get"
+      COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
+      return 0
+      ;;
+    archive)
+      opts="list put get"
       COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
       return 0
       ;;
@@ -58,10 +58,14 @@ _dlbr_completion() {
     command)
       local -a subcommands
       subcommands=(
-        'auth:Authentication and identity'
-        'invoice:Manage invoices'
-        'fiscal:Fiscal operations'
-        'workspace:Workspace management'
+        'login:Authenticate with the DLBR SEF API'
+        'me:Display information about current authenticated session'
+        'whoami:Alias for me'
+        'invoice:Manage SEF invoices'
+        'invoices:Alias for invoice'
+        'fiscal:Manage Fiscalization transactions'
+        'workspace:Manage active workspace configuration'
+        'archive:Manage UBL/SEF document storage'
         'completion:Generate shell completion script'
         'help:Show help'
       )
@@ -69,44 +73,38 @@ _dlbr_completion() {
       ;;
     args)
       case $words[1] in
-        auth)
-          local -a auth_subcommands
-          auth_subcommands=(
-            'login:Login to DLBR'
-            'logout:Logout'
-            'status:Check auth status'
-            'whoami:Check your current active identity'
-            'session:Print current session'
-          )
-          _describe -t auth_subcommands 'auth subcommands' auth_subcommands && return 0
-          ;;
-        invoice)
+        invoice|invoices)
           local -a invoice_subcommands
           invoice_subcommands=(
-            'list:List recent invoices'
-            'send:Send an invoice'
-            'view:View an invoice'
-            'draft:Draft an invoice'
+            'status:Check the SEF status of an invoice by its ID'
+            'list:List invoices from the internal registry'
           )
           _describe -t invoice_subcommands 'invoice subcommands' invoice_subcommands && return 0
           ;;
         fiscal)
           local -a fiscal_subcommands
           fiscal_subcommands=(
-            'receipt:Issue a fiscal receipt'
-            'z-report:Issue a Z report'
-            'x-report:Issue an X report'
+            'status:Check the status of a POS transaction'
+            'list:List fiscal receipts from the internal ledger'
           )
           _describe -t fiscal_subcommands 'fiscal subcommands' fiscal_subcommands && return 0
           ;;
         workspace)
           local -a workspace_subcommands
           workspace_subcommands=(
-            'list:List workspaces'
-            'switch:Switch workspace'
-            'info:Workspace information'
+            'set:Set the active workspace ID'
+            'get:Get the currently configured active workspace ID'
           )
           _describe -t workspace_subcommands 'workspace subcommands' workspace_subcommands && return 0
+          ;;
+        archive)
+          local -a archive_subcommands
+          archive_subcommands=(
+            'list:List archived documents'
+            'put:Upload a document to the archive'
+            'get:Download an archived document'
+          )
+          _describe -t archive_subcommands 'archive subcommands' archive_subcommands && return 0
           ;;
         *)
           # If no subcommand matches, do NOT fall back to files
