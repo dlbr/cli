@@ -24,20 +24,20 @@ All interactions with the API require an authenticated session. The DLBR CLI doe
 2. Run the login command:
 
 ```bash
-dlbr auth login
+dlbr login
 # You will be securely prompted to paste your token
 ```
 
 You can also bypass the prompt in CI/CD environments by passing the token explicitly:
 
 ```bash
-dlbr auth login --token <your_token>
+dlbr login --token <your_token>
 ```
 
 Check your active identity:
 
 ```bash
-dlbr auth whoami
+dlbr whoami
 ```
 
 ## Shell Autocomplete (Zero-Latency)
@@ -95,7 +95,7 @@ Manage UBL/SEF document storage.
 By default, the CLI points to `https://api.dlbr.cloud`. For local development or isolated staging environments, you can override the base endpoint via environment variables:
 
 ```bash
-DLBR_API_URL=http://localhost:8787 dlbr auth whoami
+DLBR_API_URL=http://localhost:8787 dlbr whoami
 ```
 
 ## Architecture & Security
