@@ -1,0 +1,32 @@
+{
+  "name": "@dlbr/cli",
+  "version": "1.0.0",
+  "description": "DLBR CLI",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "dlbr": "./dist/index.cjs"
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node18 --outfile=dist/index.cjs --banner:js=\"#!/usr/bin/env node\"",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.cjs",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@dlbr/shared": "workspace:*",
+    "@inquirer/prompts": "^8.5.2",
+    "commander": "^12.1.0",
+    "ora": "^9.4.0",
+    "yoctocolors": "^2.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "esbuild": "^0.21.0",
+    "tsx": "^4.10.0",
+    "typescript": "^5.4.0",
+    "vitest": "^4.1.9"
+  }
+}
