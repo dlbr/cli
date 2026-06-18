@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import { request } from '../utils/api.js';
-import { red, green, bold, dim, yellow } from 'yoctocolors';
+import { red, green, bold, dim, yellow, gray } from 'yoctocolors';
 
 export interface InvoiceRecord {
   id: string;
@@ -27,9 +27,8 @@ export interface InvoiceStatusResponse {
 
 export function registerInvoiceCommands(program: Command): void {
   const invoiceCmd = program
-    .command('invoices')
-    .alias('invoice')
-    .description('Manage SEF invoices');
+    .command('invoice')
+    .description(gray('Manage SEF invoices'));
 
   invoiceCmd
     .command('status <id>')

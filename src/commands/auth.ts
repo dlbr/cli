@@ -58,7 +58,7 @@ export function registerAuthCommands(program: Command): void {
     });
 
   program
-    .command('me').alias('whoami')
+    .command('whoami')
     .description(gray('Display information about the current authenticated session'))
     .option('--json', gray('Output results in JSON format'))
     .action(async (options: { json?: boolean }): Promise<void> => {

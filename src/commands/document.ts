@@ -5,14 +5,14 @@ import ora from 'ora';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-export function registerArchiveCommands(program: Command): void {
-  const archiveCmd = program
-    .command('archive')
+export function registerDocumentCommands(program: Command): void {
+  const documentCmd = program
+    .command('document')
     .description(dim('Manage UBL/SEF document storage'));
 
-  archiveCmd
+  documentCmd
     .command('list')
-    .description(dim('List archived documents'))
+    .description(dim('List stored documents'))
     .option('--json', 'Output results in JSON format')
     .action(async (options: { json?: boolean }) => {
       const spinner = !options.json ? ora('Fetching archive list...').start() : null;
@@ -35,9 +35,9 @@ export function registerArchiveCommands(program: Command): void {
       }
     });
 
-  archiveCmd
+  documentCmd
     .command('put <filePath>')
-    .description(dim('Upload a document to the archive'))
+    .description(dim('Upload a document to storage'))
     .option('--folder <folderId>', 'Folder ID')
     .option('--category <cat>', 'Category', 'ostalo')
     .action(async (filePath: string, options: { folder?: string; category: string }) => {
@@ -66,9 +66,9 @@ export function registerArchiveCommands(program: Command): void {
       }
     });
 
-  archiveCmd
+  documentCmd
     .command('get <fileId>')
-    .description(dim('Download an archived document'))
+    .description(dim('Download a stored document'))
     .action(async (fileId: string) => {
       const spinner = ora('Downloading...').start();
       try {

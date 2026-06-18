@@ -84,11 +84,11 @@ Manage active workspace configuration.
 - `dlbr workspace set <id>` - Set the active workspace ID
 - `dlbr workspace get` - Get the currently configured active workspace ID
 
-### Archive
+### Document
 Manage UBL/SEF document storage.
-- `dlbr archive list` - List archived documents
-- `dlbr archive put <filePath>` - Upload a document to the archive
-- `dlbr archive get <fileId>` - Download an archived document
+- `dlbr document list` - List stored documents
+- `dlbr document put <filePath>` - Upload a document to storage
+- `dlbr document get <fileId>` - Download a stored document
 
 ## Configuration & Environments
 

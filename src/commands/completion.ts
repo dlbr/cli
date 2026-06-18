@@ -9,7 +9,7 @@ _dlbr_completions() {
 
   case "\${prev}" in
     dlbr)
-      opts="login me whoami invoice invoices fiscal workspace archive completion help"
+      opts="login me whoami invoice invoices fiscal workspace document completion help"
       COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
       return 0
       ;;
@@ -28,7 +28,7 @@ _dlbr_completions() {
       COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
       return 0
       ;;
-    archive)
+    document)
       opts="list put get"
       COMPREPLY=( $(compgen -W "\${opts}" -- "\${cur}") )
       return 0
@@ -65,7 +65,7 @@ _dlbr_completion() {
         'invoices:Alias for invoice'
         'fiscal:Manage Fiscalization transactions'
         'workspace:Manage active workspace configuration'
-        'archive:Manage UBL/SEF document storage'
+        'document:Manage UBL/SEF document storage'
         'completion:Generate shell completion script'
         'help:Show help'
       )
@@ -97,14 +97,14 @@ _dlbr_completion() {
           )
           _describe -t workspace_subcommands 'workspace subcommands' workspace_subcommands && return 0
           ;;
-        archive)
-          local -a archive_subcommands
-          archive_subcommands=(
-            'list:List archived documents'
-            'put:Upload a document to the archive'
-            'get:Download an archived document'
+        document)
+          local -a document_subcommands
+          document_subcommands=(
+            'list:List stored documents'
+            'put:Upload a document to storage'
+            'get:Download a stored document'
           )
-          _describe -t archive_subcommands 'archive subcommands' archive_subcommands && return 0
+          _describe -t document_subcommands 'document subcommands' document_subcommands && return 0
           ;;
         *)
           # If no subcommand matches, do NOT fall back to files
